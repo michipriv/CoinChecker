@@ -1,0 +1,35 @@
+
+#webhook
+https://power2go.at/alert/wh.php
+
+
+erstellen der datenbank
+https://power2go.at/alert/wh.php?action=init
+
+
+zeige inhalt der tabelle an
+https://power2go.at/alert/wh.php?action=show
+
+
+{"time":"{{time}}","coin":"{{ticker}}","indikator":"QQE-MOD","entry":"long" }
+qqe linie
+aufwärts kreuzend
+wert 0
+
+
+{"time":"{{time}}","coin":"{{ticker}}","indikator":"TRENDMETER","entry":"long" }
+3 TM turns green with TBs 1+2
+pro balkenschluss
+
+
+
+curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2023-01-01T00:00:00Z\",\"coin\":\"TEST\",\"indikator\":\"QQE-MOD\",\"entry\":\"TEST\"}"  -X POST  https://power2go.at/alert/wh.php
+
+curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2024-02-28T08:40:00Z\",\"coin\":\"BTCUSDT\",\"indikator\":\"QQE-MOD\",\"entry\":\"long\"}"  -X POST  http://localhost/alert/wh.php
+curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2024-02-28T08:40:00Z\",\"coin\":\"BTCUSDT\",\"indikator\":\"TRENDMETER\",\"entry\":\"long\"}"  -X POST  http://localhost/alert/wh.php
+
+
+set pass=pass
+
+curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2024-02-28T08:45:00Z\",\"coin\":\"BTCUSDT\",\"indikator\":\"QQE-MOD\",\"entry\":\"long\"}"  -u michi@dermader.com:%pass% -X POST  https://power2go.at/alert/wh.php
+curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2024-02-28T08:47:00Z\",\"coin\":\"BTCUSDT\",\"indikator\":\"TRENDMETER\",\"entry\":\"long\"}"  -u michi@dermader.com:%pass% -X POST  https://power2go.at/alert/wh.php
