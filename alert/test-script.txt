@@ -1,3 +1,8 @@
+URLS für Tradingview
+BTC https://de.tradingview.com/chart/v4d255ae/
+ETH https://de.tradingview.com/chart/VfcJQDvh/
+RUNE https://de.tradingview.com/chart/prQpMTEh/
+
 
 #webhook
 https://power2go.at/alert/wh.php

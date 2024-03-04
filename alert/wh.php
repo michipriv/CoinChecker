@@ -410,6 +410,11 @@ function showLatestEntriesPerCoin() {
                     echo "</tbody></table>";
 					//Alert Button für coin
 					echo "<button onclick='confirmAlert(" . $row['id'] . ")' class='btn btn-primary'>Bestätigen</button>";
+					echo "<a href='https://de.tradingview.com/chart/v4d255ae/' class='btn btn-primary'>Button Text</a>";
+
+
+
+
 
 
                     echo "</div>"; // Ende von .table-responsive
