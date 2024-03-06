@@ -1,27 +1,4 @@
-<?php
-/* Smarty version 4.3.4, created on 2024-03-06 06:51:26
-  from 'C:\tmp\htdocs\log\template\indikator.tpl' */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '4.3.4',
-  'unifunc' => 'content_65e8045ee5eed3_46911639',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    'e7adaece17af4159fbd52255df83bc85ce7115f9' => 
-    array (
-      0 => 'C:\\tmp\\htdocs\\log\\template\\indikator.tpl',
-      1 => 1709704283,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-  ),
-),false)) {
-function content_65e8045ee5eed3_46911639 (Smarty_Internal_Template $_smarty_tpl) {
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -119,41 +96,23 @@ function content_65e8045ee5eed3_46911639 (Smarty_Internal_Template $_smarty_tpl)
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['indikatoren']->value, 'indikator');
-$_smarty_tpl->tpl_vars['indikator']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['indikator']->value) {
-$_smarty_tpl->tpl_vars['indikator']->do_else = false;
-?>
-                    <tr class="<?php if ($_smarty_tpl->tpl_vars['indikator']->value['entry'] == 'long') {?>long-entry<?php } elseif ($_smarty_tpl->tpl_vars['indikator']->value['entry'] == 'short') {?>short-entry<?php }?>">
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['id'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['tag'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['zeit'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['coin'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['indikator'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['entry'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['match_found'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['matched_ids'];?>
-</td>
-                        <td><?php echo $_smarty_tpl->tpl_vars['indikator']->value['checked'];?>
-</td>
-                        <td><?php if ($_smarty_tpl->tpl_vars['indikator']->value['is_confirmed']) {?>Ja<?php } else { ?>Nein<?php }?></td>
+                    {foreach $indikatoren as $indikator}
+                    <tr class="{if $indikator.entry == 'long'}long-entry{elseif $indikator.entry == 'short'}short-entry{/if}">
+                        <td>{$indikator.id}</td>
+                        <td>{$indikator.tag}</td>
+                        <td>{$indikator.zeit}</td>
+                        <td>{$indikator.coin}</td>
+                        <td>{$indikator.indikator}</td>
+                        <td>{$indikator.entry}</td>
+                        <td>{$indikator.match_found}</td>
+                        <td>{$indikator.matched_ids}</td>
+                        <td>{$indikator.checked}</td>
+                        <td>{if $indikator.is_confirmed}Ja{else}Nein{/if}</td>
                     </tr>
-                    <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                    {/foreach}
                 </tbody>
             </table>
         </div>
     </div>
 </body>
 </html>
-<?php }
-}

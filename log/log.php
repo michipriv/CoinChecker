@@ -2,46 +2,7 @@
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-/*
-http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=trading&table=indikator
 
-
-Verhalte dich wie ein php programmiere mit folgenden kentnisse:
-cryptotrading, smarty, bootstrap und ooe entwicklung in php.
-erstelle die smarty templates  in responsive Design für Mobilgeräte 
-verwened grüne blaue pastell farben mit hover effekt bei buttons
-buttons sind abgerunet ud die eingae felder entsprechen einem modern design 
-verwende dieses thema von bootstrap:
-<link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" rel="stylesheet">
-
-das projekt verwendet folgende Verzeichniss Struktur
-class/
-	clDB.php
-	clFormular.php
-	
-cache
-smarty
-template
-	config
-	template_c
-	formular.tpl
-	
-log.db  (Sqllite db)
-log.php  (haupt file)
-etc
-	config.php
-image
-
-Antworte mit BINGO wenn du es gelesen hast.
-
-
-ich kopiere dir den aktuellen code rein, wenn du den code gelsen hast antworte nur mit bingo.
-verwende diesen code um später die programmierung zu erweitern
-
-hast du alle dateien gelesen?
-liste auf welche datein und klassen du nun kennst
-
-*/
 
 // Klassendefinitionen einbinden
 require_once __DIR__ . '/etc/config.php';
@@ -79,11 +40,11 @@ if (isset($_GET['action'])) {
             
 			//$dbHandler->createTable();
 			//$dbHandler->truncateTable();
-            echo "Die Datenbank und die Tabelle für Handelsdatensätze wurden erfolgreich initialisiert.";
+            //echo "Die Datenbank und die Tabelle für Handelsdatensätze wurden erfolgreich initialisiert.";
             break;
             
         case 'form':
-			// zeige INgabeform zum Aufzeichnen der Tradingdaten
+			// zeige Eigabeform zum Aufzeichnen der Tradingdaten
             $logFormHandler->displayleeresForm();
             break;
 			
@@ -113,10 +74,11 @@ if (isset($_GET['action'])) {
 			
 		case 'latest':
             // zeige aktuelle Coins und Alerts
+            $indikatorFormHandler->fetchLatestEntries();
 
             break;
 		
-		case 'AllIndikator':
+		case 'AlarmAnzeige':
 			$indikatorFormHandler->displayAllIndikator();
 			break;
 			

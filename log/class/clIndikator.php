@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 require_once __DIR__ . '/../etc/config.php';
 require_once SMARTY_PATH . 'Smarty.class.php';
@@ -25,7 +26,8 @@ http://localhost/log/log.php?action=webhook
  
  
 Testaufruf Dos
-curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2023-01-01T00:00:00Z\",\"coin\":\"TEST\",\"indikator\":\"QQE-MOD\",\"entry\":\"TEST\"}" http://localhost/alert/wh.php?action=webhook
+curl -X POST -H "Content-Type: application/json" -d "{\"time\":\"2024-03-05T00:00:00Z\",\"coin\":\"TEST\",\"indikator\":\"QQE-MOD\",\"entry\":\"TEST\"}" http://localhost/log/log.php?action=webhook
+
 			
 
 */
@@ -42,7 +44,7 @@ class clIndikator {
         $this->smarty->setConfigDir(CONFIG_DIR);
 
         // Initialisiere die Verbindung zur Datenbank Klasse
-        $this->tradeRecord = new TradeRecord(DB_PATH);
+        $this->tradeRecord = new TradeRecord();
 		
 				
     }
@@ -54,8 +56,7 @@ class clIndikator {
 
 			if ($data) {
 				try {
-					// Erstelle eine neue PDO-Verbindung für MySQL
-					// Ersetze 'your_host', 'your_db', 'your_username', 'your_password' mit deinen tatsächlichen Verbindungsinformationen
+				
 					
 					// Umwandlung und Formatierung der Zeit
 					$timeUTC =  new DateTime($data['time']);
@@ -91,6 +92,48 @@ class clIndikator {
 		//print_r($indikator);
 				
 		$this->smarty->assign('indikatoren', $indikator);
-		$this->smarty->display('indikator.tpl'); 
+		$this->smarty->display('indikatorList.tpl'); 
 	}
+	
+	
+     public function fetchLatestEntries() {
+        $coins = ['BTCUSDT', 'ETHUSDT', 'RUNEUSDT'];
+        $entriesData = [];
+    
+        foreach ($coins as $coin) {
+            $results = $this->tradeRecord->getLatestEntriesForCoin($coin);
+    
+            $gotSignal = false;
+    
+            // Berechne die Zeitdifferenz zwischen den letzten beiden Einträgen
+            $timeDiff = abs(strtotime($results[0]['zeit']) - strtotime($results[1]['zeit']));
+            
+            // Überprüfe, ob die Zeitdifferenz <= 15 Minuten (900 Sekunden) ist
+            // und ob die Indikatoren unterschiedlich sind, aber der 'entry' Wert gleich ist
+            if ($results[0]['indikator'] !== $results[1]['indikator'] &&
+                $results[0]['entry'] === $results[1]['entry'] && 
+                $timeDiff <= 900) {
+                $gotSignal = true;
+            } else {
+                // Wenn mehr als 15 Minuten vergangen sind, behalte nur den neuesten Datensatz
+                $results = [$results[0]];
+            }
+    
+            // Füge die Daten für diesen Coin zum Array hinzu
+            $entriesData[$coin] = [
+                'entries' => $results,
+                'gotSignal' => $gotSignal,
+            ];
+        }
+    
+        // Weise die gesammelten Daten Smarty zu und zeige das Template an
+        $this->smarty->assign('entriesData', $entriesData);
+        $this->smarty->display('indikatorLast.tpl');
+    }
+
+
+
+
+
+
 }

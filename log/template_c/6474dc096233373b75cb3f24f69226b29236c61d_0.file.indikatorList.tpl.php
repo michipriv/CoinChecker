@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 4.3.4, created on 2024-03-06 06:51:26
-  from 'C:\tmp\htdocs\log\template\indikator.tpl' */
+/* Smarty version 4.3.4, created on 2024-03-06 06:52:33
+  from 'C:\tmp\htdocs\log\template\indikatorList.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.4',
-  'unifunc' => 'content_65e8045ee5eed3_46911639',
+  'unifunc' => 'content_65e804a14b5c61_97497676',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'e7adaece17af4159fbd52255df83bc85ce7115f9' => 
+    '6474dc096233373b75cb3f24f69226b29236c61d' => 
     array (
-      0 => 'C:\\tmp\\htdocs\\log\\template\\indikator.tpl',
+      0 => 'C:\\tmp\\htdocs\\log\\template\\indikatorList.tpl',
       1 => 1709704283,
       2 => 'file',
     ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65e8045ee5eed3_46911639 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65e804a14b5c61_97497676 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

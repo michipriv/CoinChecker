@@ -168,11 +168,12 @@ class TradeRecord {
 		try {
 			// Überprüfe, ob alle Datensätze abgerufen werden sollen
 			if ($id == -1) {
-				$sql = "SELECT * FROM $table";
+				$sql = "SELECT * FROM $table ORDER BY tag DESC, zeit DESC";
+
 				$stmt = $this->db->prepare($sql);
 				// BindParam wird in diesem Fall nicht benötigt
 			} else {
-				$sql = "SELECT * FROM $table WHERE id = :id";
+				$sql = "SELECT * FROM $table WHERE id = :id ORDER BY tag DESC, zeit DESC";
 				$stmt = $this->db->prepare($sql);
 				$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			}
@@ -222,5 +223,19 @@ class TradeRecord {
 	
 	
 	/* showLogList Formular Ende */
+	
+	/* Alert Indikator  START*/
+	
+	// die letzten beiden Alerts von einem Coin aufrufen
+    public function getLatestEntriesForCoin($coin) {
+        $stmt = $this->db->prepare("SELECT * FROM indikator WHERE coin = :coin AND is_confirmed = FALSE ORDER BY id DESC LIMIT 2");
+        $stmt->execute([':coin' => $coin]);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $results;
+    }
+    
+    
+	/* Alert Indikator  ENDE*/
 
 }

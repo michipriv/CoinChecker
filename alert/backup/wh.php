@@ -220,15 +220,13 @@ function extendTable() {
 	SELECT MAX(id) AS latestId FROM indikator GROUP BY coin;
 	
 	";
-	
-	/*
 	try {
 		$pdo->exec($sql);
 		echo "Spalte erfolgreich hinzugefügt.";
 	} catch (PDOException $e) {
 		echo "Ein Fehler ist aufgetreten: " . $e->getMessage();
 	}
-	*/
+	
 	
 	
 	

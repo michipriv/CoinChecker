@@ -34,7 +34,7 @@
                     <a href="log.php?action=dbinit" class="btn custom-btn">DB </a>
 					<a href="log.php?action=showlist" class="btn custom-btn">Log-Liste anzeigen</a>
                     <a href="log.php?action=form" class="btn custom-btn">Log-Formular anzeigen</a>
-					<a href="log.php?action=AllIndikator" class="btn custom-btn">Alle Alarme</a>
+					<a href="log.php?action=AlarmAnzeige" class="btn custom-btn">Alle Alarme</a>
 					<a href="log.php?action=latest" class="btn custom-btn">aktuelle Alarme</a>
                 </div>
             </div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.4, created on 2024-02-25 20:46:21
+/* Smarty version 4.3.4, created on 2024-03-05 22:00:10
   from 'C:\tmp\htdocs\log\template\log.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.4',
-  'unifunc' => 'content_65db990d454550_48619960',
+  'unifunc' => 'content_65e787dadc7c87_56225807',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c6a134d87a63d470f2eff7e04b30c6e25b7ba286' => 
     array (
       0 => 'C:\\tmp\\htdocs\\log\\template\\log.tpl',
-      1 => 1708890262,
+      1 => 1709672409,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_65db990d454550_48619960 (Smarty_Internal_Template $_smarty_tpl) {
+function content_65e787dadc7c87_56225807 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +57,7 @@ function content_65db990d454550_48619960 (Smarty_Internal_Template $_smarty_tpl)
                     <a href="log.php?action=dbinit" class="btn custom-btn">DB </a>
 					<a href="log.php?action=showlist" class="btn custom-btn">Log-Liste anzeigen</a>
                     <a href="log.php?action=form" class="btn custom-btn">Log-Formular anzeigen</a>
-					<a href="log.php?action=AllIndikator" class="btn custom-btn">Alle Alarme</a>
+					<a href="log.php?action=AlarmAnzeige" class="btn custom-btn">Alle Alarme</a>
 					<a href="log.php?action=latest" class="btn custom-btn">aktuelle Alarme</a>
                 </div>
             </div>
