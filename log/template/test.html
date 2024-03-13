@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin, Zeit-Indikator und Leere Boxen</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/litera/bootstrap.min.css">
+    <style>
+        .container {
+            padding-left: 0; /* Entfernt den linken Innenabstand */
+            padding-right: 0; /* Entfernt den rechten Innenabstand */
+        }
+        .row {
+            margin-left: 0px; /* Korrigiert den standardmäßigen negativen Margin von Bootstrap Rows */
+            margin-right: 0px;
+            
+        }
+        
+        .custom-box {
+            padding: 0px;
+            margin: 10; /* Entfernt den Außenabstand */
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 80px; /* definition der höhe der boxen über min max*/
+            max-height: 80px;
+        }
+        .coin-box { background-color: #87CEFA; color: white; }
+        .time-indicator-box { background-color: #90EE90; color: white; }
+        .empty-box { background-color: #D3D3D3; }
+        .full-width-box {
+            background-color: #f8f9fa;
+            padding: 1px;
+            margin-top: 1px; /* Minimaler Abstand nur oben */
+            border-radius: 15px;
+        }
+        .inner-box {
+            background-color: #f8f9fa;
+            margin: 3px;
+            padding: 1px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .btn-custom {
+            margin: 2px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+        .col-md-4 {
+            padding: 1px; /* Abstand zwischen den boxen */
+            
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <!-- box1 -->
+        <div class="col-md-4">
+            <div class="custom-box coin-box" >
+                <h1 style="font-size: 48px; font-weight: bold; letter-spacing: 2px;">COIN</h1>
+            </div>
+        </div>
+      
+       <!-- box2 -->
+       <div class="col-md-4">
+        <div class="custom-box time-indicator-box" >
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Zeit</td><td>Indikator 1</td>
+                    </tr>
+                    <tr>
+                        <td>Zeit</td><td>Indikator 2</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+         <!-- box3 -->
+        <div class="col-md-4">
+            <div class="custom-box empty-box">
+                <!-- Kein Inhalt -->
+            </div>
+        </div>
+    </div>
+    
+     <!-- box4 -->
+       <div class="full-width-box">
+        <div class="inner-box" style="padding: 1px;">
+            <button class="btn btn-custom" style="background-color: #AEC6CF;">Alarm</button> <!-- Pastellblau -->
+            <button class="btn btn-custom" style="background-color: #FDBA74;">TradingView</button> <!-- Pastellorange -->
+            <button class="btn btn-custom" style="background-color: #77DD77;">Long</button> <!-- Pastellgrün -->
+            <button class="btn btn-custom" style="background-color: #FF6961;">Short</button> <!-- Pastellrot -->
+            <button class="btn btn-custom" style="background-color: #CFCFC4;">Close</button> <!-- Pastellgrau -->
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

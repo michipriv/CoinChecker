@@ -235,6 +235,40 @@ class TradeRecord {
         return $results;
     }
     
+    public function updateSignalMatches($coin, $ids) {
+        if (empty($ids) || count($ids) < 2) {
+            // Wenn nicht genügend IDs für ein Match vorhanden sind, breche ab.
+            return false;
+        }
+    
+        try {
+            $matchedIdsString = implode(',', $ids); // Konvertiere die IDs-Array in einen String
+            $matchFound = true; // Setze match_found auf true
+    
+            // Update-Query vorbereiten
+            $query = "UPDATE indikator SET match_found = :match_found, matched_ids = :matched_ids WHERE id IN (:id1, :id2)";
+            $stmt = $this->db->prepare($query);
+    
+            // Parameter binden
+            $stmt->bindParam(':match_found', $matchFound, PDO::PARAM_BOOL);
+            $stmt->bindParam(':matched_ids', $matchedIdsString, PDO::PARAM_STR);
+            $stmt->bindParam(':id1', $ids[0], PDO::PARAM_INT);
+            $stmt->bindParam(':id2', $ids[1], PDO::PARAM_INT);
+    
+            // Query ausführen
+            $stmt->execute();
+    
+            // Überprüfe, ob die Operation erfolgreich war
+            if ($stmt->rowCount() > 0) {
+                return true; // Erfolg
+            }
+            return false; // Keine Zeilen betroffen, Operation nicht erfolgreich
+        } catch (PDOException $e) {
+            error_log('Fehler beim Aktualisieren der Signal-Matches: ' . $e->getMessage());
+            return false; // Fehler
+        }
+    }
+
     
 	/* Alert Indikator  ENDE*/
 

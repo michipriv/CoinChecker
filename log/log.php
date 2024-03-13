@@ -74,7 +74,8 @@ if (isset($_GET['action'])) {
 			
 		case 'latest':
             // zeige aktuelle Coins und Alerts
-            $indikatorFormHandler->fetchLatestEntries();
+            $indikatorFormHandler->collectEntriesData();
+            $indikatorFormHandler->displayEntriesData();
 
             break;
 		

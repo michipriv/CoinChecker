@@ -95,43 +95,58 @@ class clIndikator {
 		$this->smarty->display('indikatorList.tpl'); 
 	}
 	
-	
-     public function fetchLatestEntries() {
+    
+    //Alarm Logik verarbeiten, wenn die Alarme intreffen, asuwertung durchüfhen und in der db speichern	
+    public function collectEntriesData() {
         $coins = ['BTCUSDT', 'ETHUSDT', 'RUNEUSDT'];
         $entriesData = [];
     
         foreach ($coins as $coin) {
             $results = $this->tradeRecord->getLatestEntriesForCoin($coin);
     
-            $gotSignal = false;
+            if (count($results) > 1) { // Stelle sicher, dass es mindestens zwei Einträge gibt
+                $timeDiff = abs(strtotime($results[0]['zeit']) - strtotime($results[1]['zeit']));
     
-            // Berechne die Zeitdifferenz zwischen den letzten beiden Einträgen
-            $timeDiff = abs(strtotime($results[0]['zeit']) - strtotime($results[1]['zeit']));
-            
-            // Überprüfe, ob die Zeitdifferenz <= 15 Minuten (900 Sekunden) ist
-            // und ob die Indikatoren unterschiedlich sind, aber der 'entry' Wert gleich ist
-            if ($results[0]['indikator'] !== $results[1]['indikator'] &&
-                $results[0]['entry'] === $results[1]['entry'] && 
-                $timeDiff <= 900) {
-                $gotSignal = true;
-            } else {
-                // Wenn mehr als 15 Minuten vergangen sind, behalte nur den neuesten Datensatz
-                $results = [$results[0]];
+                // Überprüfe die Bedingungen
+                if ($results[0]['indikator'] !== $results[1]['indikator'] &&
+                    $results[0]['entry'] === $results[1]['entry'] &&
+                    $timeDiff <= 900) {
+                    
+                    // Signal erkannt, setze gotSignal auf true
+                    $gotSignal = true;
+                                        
+                    // IDs der Einträge, die das Signal ausgelöst haben
+                    $matchedIds = $results[0]['id'] . ',' . $results[1]['id'];
+    
+                    // Aktualisiere die Datenbank für beide Einträge
+                    updateIndicatorsSignal($coin, $matchedIds);
+                    
+                    $results = [$results[0]]; // Behalte nur den neuesten Datensatz
+                }
             }
     
-            // Füge die Daten für diesen Coin zum Array hinzu
             $entriesData[$coin] = [
                 'entries' => $results,
-                'gotSignal' => $gotSignal,
+                'gotSignal' => $gotSignal ?? false,
             ];
+            
+            
         }
+    
+        return $entriesData;
+    }
+    
+    
+    //Anzeige des formulares
+    public function displayEntriesData() {
+        $entriesData = $this->collectEntriesData();
     
         // Weise die gesammelten Daten Smarty zu und zeige das Template an
         $this->smarty->assign('entriesData', $entriesData);
         $this->smarty->display('indikatorLast.tpl');
     }
-
-
+    
+    
 
 
 
